@@ -8,15 +8,21 @@ int cnt_cond_count;
 int main() {
 	i += ptr;
 	buffer += tbl;
-	input_exit(tbl_count + i);
-	i += 1;
-	idx += i;
+	tbl += ptr;
+	ptr *= i;
+	ptr += i;
+	i &= 33;
+	i *= ptr;
+	input_exit(cnt_cond_count & i);
+	i += idx;
 	main();
 }
 
 int input_exit(int a) {
-	i += 1;
-	idx += i;
+	i += ptr;
+	i &= 0;
+	i &= tbl;
+	i += idx;
 	i &= 82;
 	i &= buffer;
 	i &= 117;

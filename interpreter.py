@@ -17,7 +17,6 @@ _registers = ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>']
 class CButNot:
     def __init__(self, commands, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        print(commands)
         self.commands = commands
         self.command_idx = commands.index("main")
         self.registers = {}

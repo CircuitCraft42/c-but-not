@@ -146,3 +146,8 @@ class CButNot:
             sys.stdout.write(chr(value))
             return value
             sys.stdout.write
+    def cmd_count(self, position, value):
+        if position == 'prefix':
+            return 1 - value
+        else:
+            return 0 - value

@@ -2,8 +2,15 @@ int i;
 int ptr;
 int buffer;
 int tbl;
+int count;
 int tbl_count;
 int idx;
+int idx_tbl;
+int cnt_tbl;
+int cnt;
+int buffer_tbl;
+int cond;
+int cond_count;
 int cnt_cond_count;
 int main() {
 	i += ptr;
@@ -22,7 +29,9 @@ int input_exit(int a) {
 	i += ptr;
 	i &= 0;
 	i &= tbl;
-	i += idx;
+	i &= 128;
+	i &= ptr;
+	idx += i;
 	i &= 82;
 	i &= buffer;
 	i &= 117;

@@ -7,6 +7,7 @@ int cnt;
 int cnt_ptr;
 int ptr_idx;
 int index_ptr;
+int ptr_buf;
 int main() {
 	i += 10;
 	i += ptr;
@@ -18,8 +19,7 @@ int main() {
 }
 int fibo() {
 	// fibo: fibonacci sequence. Takes one parameter (which term to compute) and returns that term.
-	i &= 2;
-	table &= i; // swap
+	ptr_buf &= ptr; // swap
 	ptr += ptr; // and pop into +
 	i |= 2;
 	ptr *= i;
@@ -27,7 +27,7 @@ int fibo() {
 	fibo_recurse(cnt * i); // goto if argument >= 3
 	i += 1; // return 1 in this case
 	i += ptr; // drop and push...
-	table &= i; // ...swap...
+	ptr_buf &= ptr; // swap...	
 	ptr += counter; // ...and ret
 }
 int fibo_recurse(int a) {
@@ -38,8 +38,7 @@ int fibo_recurse(int a) {
 	table &= i; // swap
 	fibo(counter + ptr); // and recurse again!
 	ptr_idx += ptr;
-	i &= 2;
-	table &= i; // swap for the last time
+	ptr_buf &= ptr; // swap for the last time
 	ptr += counter; // ...and ret
 }
 int end() {

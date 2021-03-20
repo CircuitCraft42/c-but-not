@@ -2,7 +2,7 @@ import re
 
 _word_delimiter = re.compile(r'[^a-z]')
 
-def combine_results(results):
+def check_results(results):
     if len(results) == 0:
         return True
     if len(results) == 1:
@@ -34,15 +34,19 @@ class CButNot:
     def set_register(self, value):
         self.registers[_registers[self.current_register]] = value
 
+    def run(self):
+        while self.step():
+            pass
     def step(self):
         idx = self.command_idx + 1
         cmd = self.commands[idx]
         while isinstance(cmd, str): idx += 1
         if isinstance(cmd, tuple):
             self.execute_command(*cmd)
-        elif isinstance(cmd, list) and self.check_jump(cmd[1]):
+        elif isinstance(cmd, list) and self.check_jump(cmd[1:]):
             idx = self.commands.index[cmd[0]]
         self.command_idx = idx
+        return idx + 1 < len(self.commands)
 
     def execute_command(self, prefix, register, postfix):
         self.current_register = _registers.index(register)
@@ -66,8 +70,13 @@ class CButNot:
     def execute_cmd(self, cmd, position, value):
         return self.cmds[cmd](position, value)
     def check_jump(self, operations):
-        results = list(map(lambda op: execute_command(*op)))
-        return combine_results(results)
+        results = []
+        for ops in operations:
+            result = 0
+            for op in ops:
+                result = execute_command(*op)
+            results.append(result)
+        return check_results(results)
 
     def cmd_idx(self, position, value):
         added_value = self.stack.pop() if position == 'prefix' else 1

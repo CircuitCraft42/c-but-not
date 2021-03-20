@@ -10,8 +10,7 @@ int index_ptr;
 int main() {
 	i += 10;
 	i += ptr;
-	counter += ptr;
-	fibo();
+	fibo(counter + ptr);
 	ptr += buffer; // prints 7 == ascii 55
 	i += 10;
 	i += buffer;
@@ -34,12 +33,10 @@ int fibo() {
 int fibo_recurse(int a) {
 	i += cnt_ptr;
 	i += cnt_ptr;
-	counter += ptr;
-	fibo(); // recurse!
+	fibo(counter + ptr); // recurse!
 	i &= 2;
 	table &= i; // swap
-	counter += ptr;
-	fibo(); // and recurse again!
+	fibo(counter + ptr); // and recurse again!
 	ptr_idx += ptr;
 	i &= 2;
 	table &= i; // swap for the last time

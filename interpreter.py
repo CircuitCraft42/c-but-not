@@ -28,18 +28,20 @@ class CButNot:
         value = self.execute_fragment(prefix, 'prefix', value)
         value = self.execute_fragment(postfix, 'postfix', value)
         self.registers[register] = value
-    def execute_prefix(self, fragment, position, value):
+    def execute_fragment(self, fragment, position, value):
         while True:
-            while not prefix[:1].isalpha():
-                prefix = prefix[1:]
-            if not prefix:
+            while fragment and not fragment[:1].isalpha():
+                fragment = fragment[1:]
+            if not fragment:
                 break
-            delimiter_match = _word_delimiter.search(prefix, 1)
-            delimiter_pos = delimiter_match.start() if delimiter_match is not None else len(prefix)
-            cmd = prefix[:delimiter_pos]
-            prefix = prefix[delimiter_pos:]
-            value = execute_cmd(cmd.lower(), position, value)
+            delimiter_match = _word_delimiter.search(fragment, 1)
+            delimiter_pos = delimiter_match.start() if delimiter_match is not None else len(fragment)
+            cmd = fragment[:delimiter_pos]
+            fragment = fragment[delimiter_pos:]
+            value = self.execute_cmd(cmd.lower(), position, value)
         return value
+    def execute_cmd(self, cmd, position, value):
+        return self.cmds[cmd](position, value)
 
     def cmd_idx(self, position, value):
         added_value = self.stack.pop() if position == 'prefix' else 1

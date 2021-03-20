@@ -7,5 +7,4 @@ else:
     code = open(sys.argv[1]).read()
     instructions = parsing.parse(code)
     runner = interpreter.CButNot(instructions)
-    while runner.step():
-        pass
+    runner.run()

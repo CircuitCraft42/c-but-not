@@ -9,7 +9,7 @@ param = typename ws identifier ws?
 elem = identifier / intliteral
 identifier = ~"[a-zA-Z_]" ~"[a-zA-Z0-9_]*"
 intliteral = ~"[0-9]+"
-operator = ("=" / "+" / "*" / "^" / "&" / "|") ("=")?
+operator = ("-" / "+" / "*" / "^" / "&" / "|" / "<<" / ">>") ("=")?
 ws = ~"\s+"
 typename = "int" / "long" / "char" / "float" / "double" / "short"
 semicolon = ";"

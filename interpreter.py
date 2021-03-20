@@ -7,11 +7,11 @@ def check_results(results):
     if len(results) == 0:
         return True
     if len(results) == 1:
-        return results[0] != 0
+        return results[0] > 0
     if len(results) == 2:
-        return bool(results[0] and results[1])
+        return results[0] > 0 and results[1] > 0
     if len(results) == 3:
-        return bool(results[int(bool(results[0]))+1])
+        return results[1] > 0 if results[0] > 0 else results[2] > 0
 
 _registers = ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>']
 class CButNot:

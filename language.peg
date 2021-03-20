@@ -1,8 +1,10 @@
 program = ws? (decl / function)*
 decl = typename ws identifier ws? semicolon ws?
 function = typename ws identifier ws? ((lparen ws? param (comma ws? param)* rparen) / (lparen ws? rparen)) ws? lcurly ws? statement* rcurly ws?
-statement = decl / exprstmt
-exprstmt = identifier ws? (operator ws? identifier ws?)* semicolon ws?
+statement = decl / exprstmt / callstmt
+expr = identifier ws? (operator ws? identifier ws?)*
+exprstmt = expr semicolon ws?
+callstmt = identifier ws? ((lparen ws? rparen) / (lparen ws? expr (comma ws? expr)* rparen)) ws? semicolon ws?
 param = typename ws identifier ws?
 identifier = ~"[a-zA-Z_]" ~"[a-zA-Z0-9_]*"
 operator = "=" / "+" / "*" / "^" / "&" / "|"

@@ -1,6 +1,8 @@
 from parsimonious.grammar import Grammar
 from parsimonious.nodes import NodeVisitor
 from parsimonious.exceptions import IncompleteParseError
+import pprint
+debug_printer = pprint.PrettyPrinter(indent=4)
 class CBNVisitor(NodeVisitor):
     def generic_visit(self, node, visited_children):
         """ Returns node or nested array of them. """
@@ -17,7 +19,7 @@ class CBNVisitor(NodeVisitor):
     def visit_ws(self, node, visited_children):
         return ""
 
-    def visit_exprstmt(self, node, visited_children):
+    def visit_expr(self, node, visited_children):
         """ Returns the instruction triples. """
         instructions = []
         last = visited_children[0]
@@ -26,6 +28,19 @@ class CBNVisitor(NodeVisitor):
             instructions.append((last, v[0], v[2]))
             last = v[2]
         return instructions
+
+    def visit_exprstmt(self, node, visited_children):
+        return visited_children[0]
+
+    def visit_callstmt(self, node, visited_children):
+        fxname = visited_children[0]
+        cur = visited_children[2][0]
+        conditions = [cur[2]]
+        cur = cur[3]
+        for element in cur:
+            conditions.append(element[2])
+        debug_printer.pprint([fxname] + conditions)
+        return [fxname] + conditions
 
     def visit_decl(self, node, visited_children):
         return []

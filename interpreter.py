@@ -57,6 +57,8 @@ class CButNot:
         self.registers[register] = value
         return value
     def execute_fragment(self, fragment, position, value):
+        if fragment.isnumeric():
+            return int(fragment)
         while True:
             while fragment and not fragment[:1].isalpha():
                 fragment = fragment[1:]

@@ -13,6 +13,9 @@ def check_results(results):
     if len(results) == 3:
         return results[1] > 0 if results[0] > 0 else results[2] > 0
 
+class JumpException(Exception):
+    pass
+
 _registers = ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>']
 class CButNot:
     def __init__(self, commands, *args, **kwargs):
@@ -44,12 +47,15 @@ class CButNot:
         while isinstance(cmd, str):
             idx += 1
             cmd = self.commands[idx]
-        if isinstance(cmd, tuple):
-            self.execute_command(*cmd)
-        elif isinstance(cmd, list) and self.check_jump(cmd[1:]):
-            idx = self.commands.index(cmd[0])
-        self.command_idx = idx
-        return idx + 1 < len(self.commands)
+        try:
+            if isinstance(cmd, tuple):
+                self.execute_command(*cmd)
+            elif isinstance(cmd, list) and self.check_jump(cmd[1:]):
+                idx = self.commands.index(cmd[0])
+            self.command_idx = idx
+        except JumpException:
+            pass
+        return self.command_idx + 1 < len(self.commands)
 
     def execute_command(self, prefix, register, postfix):
         self.current_register = _registers.index(register)
@@ -146,11 +152,17 @@ class CButNot:
             sys.stdout.write(chr(value))
             return value
             sys.stdout.write
-    def cmd_count(self, position, value):
+    def cmd_counter(self, position, value):
         if position == 'prefix':
-            return 1 - value
+            return self.command_idx
         else:
-            return 0 - value
-
+            self.command_idx = value
+            raise JumpException
+    def cmd_count(self, position, value):
+        return int(position == 'prefix') - value
+    def cmd_buf(self, position, value):
+        new_value = self.stack.pop()
+        self.stack.append(value)
+        return new_value
     def cmd_cond(self, position, value):
         return abs(value)

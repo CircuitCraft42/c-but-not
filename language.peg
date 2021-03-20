@@ -1,0 +1,10 @@
+program = (decl / function)*
+decl = typename ws identifier ws? ";" ws?
+function = typename ws identifier ws? "(" ws? param ("," ws? param)* ")" ws? "{" ws? statement* "}" ws?
+statement = decl / exprstmt
+exprstmt = identifier ws? (operator ws? identifier ws?)*
+param = typename ws identifier ws?
+identifier = ~"[a-zA-Z]" ~"[a-zA-Z0-9]"
+operator = "=" / "+" / "*" / "^" / "&" / "|"
+ws = ~"\s*"
+typename = "int" / "long"

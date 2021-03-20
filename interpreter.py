@@ -1,3 +1,7 @@
+import re
+
+_word_delimiter = re.compile(r'[^a-z]')
+
 _registers = ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>']
 class CButNot:
     def __init__(self, *args, **kwargs):
@@ -21,9 +25,21 @@ class CButNot:
     def execute_command(self, prefix, register, postfix):
         self.current_register = _registers.index(register)
         value = self.registers.get(register, 0)
-        value = self.execute_prefix(prefix, value)
-        value = self.execute_postfix(postfix, value)
+        value = self.execute_fragment(prefix, 'prefix', value)
+        value = self.execute_fragment(postfix, 'postfix', value)
         self.registers[register] = value
+    def execute_prefix(self, fragment, position, value):
+        while True:
+            while not prefix[:1].isalpha():
+                prefix = prefix[1:]
+            if not prefix:
+                break
+            delimiter_match = _word_delimiter.search(prefix, 1)
+            delimiter_pos = delimiter_match.start() if delimiter_match is not None else len(prefix)
+            cmd = prefix[:delimiter_pos]
+            prefix = prefix[delimiter_pos:]
+            value = execute_cmd(cmd.lower(), position, value)
+        return value
 
     def cmd_idx(self, position, value):
         added_value = self.stack.pop() if position == 'prefix' else 1
@@ -63,3 +79,20 @@ class CButNot:
             self.set_register(value)
             self.shift_register(1)
             return self.stack.pop()
+    def cmd_index(self, position, value):
+        if position == 'prefix':
+            self.stack.append(0)
+        else:
+            del self.stack[-1]
+        return value
+    def cmd_i(self, position, value):
+        return value
+    def cmd_pointer(self, position, value):
+        self.stack.append(self.stack[-1])
+        return value
+    def cmd_table(self, position, value):
+        if position == 'prefix':
+            self.stack.append(self.stack.pop(-value))
+        else:
+            self.stack.insert(-value, self.stack.pop())
+        return value

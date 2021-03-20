@@ -151,3 +151,6 @@ class CButNot:
             return 1 - value
         else:
             return 0 - value
+
+    def cmd_cond(self, position, value):
+        return abs(value)

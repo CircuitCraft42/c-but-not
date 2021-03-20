@@ -22,7 +22,8 @@ A label looks like this:
 ```
 
 The body of a label is where your program's behavior is.
-Before that, though, it's important to mention that labels are *not* functions.
+Before that, though, it's important to mention that labels are *not* functions,
+despite them superficially resembling C functions.
 When the end of a label is reached, control falls through to the next label
 in source file order.
 
@@ -70,6 +71,8 @@ positive, or the first is negative (or zero) and the third is positive.
 
 ### Operations, and registers
 
+The program has access ten registers (listed below), an unbounded stack, and
+an unbounded buffer which is initialized to zeroes. 
 Now for the juicy part: how does the code actually run?
 
 After being expanded, each statement consists of three parts: a prefix,
@@ -84,7 +87,8 @@ Why, by the prefix and postfix!
 Each of prefix and postfix consists of a sequence of words,
 separated\_by\_underscores or byCamelCase. Each word describes an operation,
 depending on whether in appears in the prefix or postfix, and a single
-integer value is passed from one operation to the next. The result from
+integer value is passed from one operation to the next; the words are chosen to be similar to 
+real programming concepts to enhance confusion. The result from
 the prefix is passed to the postfix. the result from the postfix is saved into
 the register.
 
@@ -133,3 +137,9 @@ then select the previous register and pop the stack.
 <tr><td>cond</td><td>Absolute value</td><td>Same as Prefix</td></tr>
 </table>
 
+### Executing programs
+A source file (extension .c) can be executed using the Python 3 based interpreter by
+supplying its name as a command line argument. One of the most unique components
+of this language is also important to note at this stage: *a program must
+be valid C (syntactically) in order to be valid C, But Not.* This is the reason
+for the inclusion of declaration statements. A compiler to C is also in progress.

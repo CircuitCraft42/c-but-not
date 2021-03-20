@@ -156,7 +156,7 @@ class CButNot:
         if position == 'prefix':
             return self.command_idx
         else:
-            self.command_idx = value
+            self.command_idx = value + 2
             raise JumpException
     def cmd_count(self, position, value):
         return int(position == 'prefix') - value

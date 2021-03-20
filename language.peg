@@ -7,7 +7,7 @@ exprstmt = expr semicolon ws?
 callstmt = identifier ws? ((lparen ws? rparen) / (lparen ws? expr (comma ws? expr)* rparen)) ws? semicolon ws?
 param = typename ws identifier ws?
 identifier = ~"[a-zA-Z_]" ~"[a-zA-Z0-9_]*"
-operator = "=" / "+" / "*" / "^" / "&" / "|"
+operator = ("=" / "+" / "*" / "^" / "&" / "|") ("=")?
 ws = ~"\s+"
 typename = "int" / "long"
 semicolon = ";"

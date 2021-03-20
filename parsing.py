@@ -14,7 +14,7 @@ class CBNVisitor(NodeVisitor):
 
     def visit_operator(self, node, visited_children):
         """ Returns the operator. """
-        return node.text
+        return node.text.replace('=', '')
 
     def visit_ws(self, node, visited_children):
         return ""

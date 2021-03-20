@@ -127,7 +127,7 @@ then select the previous register and pop the stack.
 <td>Output a character to stdout.</td></tr>
 <tr><td>counter</td>
 <td>Get the current program location as an integer.</td>
-<td>Jump to the *line following* where the program location was saved.</td></tr>
+<td>Jump to the line where the program location was saved *plus two*.</td></tr>
 <tr><td>count</td><td>Logical NOT (subtract from 1)</td><td>Negation</td></tr>
 <tr><td>buf</td><td>Swap value and top of stack</td><td>Same as Prefix</td></tr>
 <tr><td>cond</td><td>Absolute value</td><td>Same as Prefix</td></tr>

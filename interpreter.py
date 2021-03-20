@@ -17,6 +17,7 @@ _registers = ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>']
 class CButNot:
     def __init__(self, commands, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        print(commands)
         self.commands = commands
         self.command_idx = commands.index("main")
         self.registers = {}
@@ -41,11 +42,13 @@ class CButNot:
     def step(self):
         idx = self.command_idx + 1
         cmd = self.commands[idx]
-        while isinstance(cmd, str): idx += 1
+        while isinstance(cmd, str):
+            idx += 1
+            cmd = self.commands[idx]
         if isinstance(cmd, tuple):
             self.execute_command(*cmd)
         elif isinstance(cmd, list) and self.check_jump(cmd[1:]):
-            idx = self.commands.index[cmd[0]]
+            idx = self.commands.index(cmd[0])
         self.command_idx = idx
         return idx + 1 < len(self.commands)
 
@@ -77,7 +80,7 @@ class CButNot:
         for ops in operations:
             result = 0
             for op in ops:
-                result = execute_command(*op)
+                result = self.execute_command(*op)
             results.append(result)
         return check_results(results)
 

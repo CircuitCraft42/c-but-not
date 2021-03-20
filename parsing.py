@@ -16,6 +16,12 @@ class CBNVisitor(NodeVisitor):
         """ Returns the operator. """
         return node.text.replace('=', '')
 
+    def visit_intliteral(self, node, visited_children):
+        return int(node.text)
+
+    def visit_elem(self, node, visited_children):
+        return visited_children[0]
+
     def visit_ws(self, node, visited_children):
         return ""
 

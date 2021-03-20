@@ -41,12 +41,12 @@ class CBNVisitor(NodeVisitor):
     def visit_callstmt(self, node, visited_children):
         fxname = visited_children[0]
         cur = visited_children[2][0]
+        if type(cur[2]) != list: return [[fxname]]
         conditions = [cur[2]]
         cur = cur[3]
         for element in cur:
             conditions.append(element[2])
-        debug_printer.pprint([fxname] + conditions)
-        return [fxname] + conditions
+        return [[fxname] + conditions]
 
     def visit_decl(self, node, visited_children):
         return []

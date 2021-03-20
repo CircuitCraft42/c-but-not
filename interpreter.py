@@ -1,4 +1,5 @@
 import re
+import sys
 
 _word_delimiter = re.compile(r'[^a-z]')
 
@@ -133,3 +134,11 @@ class CButNot:
         else:
             self.stack.insert(-value, self.stack.pop())
         return value
+    def cmd_buffer(self, position, value):
+        if position == 'prefix':
+            readch = sys.stdin.read(1)
+            return ord(readch) if readch else 0
+        else:
+            sys.stdout.write(chr(value))
+            return value
+            sys.stdout.write

@@ -4,7 +4,7 @@ function = typename ws identifier ws? "(" ws? param ("," ws? param)* ")" ws? "{"
 statement = decl / exprstmt
 exprstmt = identifier ws? (operator ws? identifier ws?)* ";" ws?
 param = typename ws identifier ws?
-identifier = ~"[a-zA-Z]" ~"[a-zA-Z0-9]"
+identifier = ~"[a-zA-Z]" ~"[a-zA-Z0-9]*"
 operator = "=" / "+" / "*" / "^" / "&" / "|"
-ws = ~"\s*"
+ws = ~"\s+"
 typename = "int" / "long"

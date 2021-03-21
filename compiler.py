@@ -110,7 +110,7 @@ ops_pre = {
             stack + stack_top - value + 2, (value - 1) * sizeof *stack); \
             stack[stack_top - value + 1] = tmp; }} while(0);',
     'buffer': 'value = getchar(); value = value != EOF ? value : 0;',
-    'counter': 'value = &&{nextline};',
+    'counter': 'value = &&line_{nextline};',
     'count': 'value = 1 - value;',
     'buf': 'do {{ intptr_t tmp = stack[stack_top]; \
             stack[stack_top] = value; value = tmp; }} while(0);',

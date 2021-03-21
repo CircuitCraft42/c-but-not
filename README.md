@@ -144,6 +144,6 @@ of this language is also important to note at this stage: *a program must
 be valid C (syntactically) in order to be valid C, But Not.* This is the reason
 for the inclusion of declaration statements.
 
-The `compiler.py` script translated C, But Not code into vanilla C99.
+The `compiler.py` script translates C, But Not code into vanilla C99.
 It communicates only via stdio, so you need to pipe in and out of it.
 Using the `counter` operation requires gcc extensions.

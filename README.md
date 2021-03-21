@@ -131,7 +131,7 @@ then select the previous register and pop the stack.
 <td>Output a character to stdout.</td></tr>
 <tr><td>counter</td>
 <td>Get the current program location as an integer.</td>
-<td>Jump to the line where the program location was saved *plus two*.</td></tr>
+<td>Jump to the line after where the program location was saved.</td></tr>
 <tr><td>count</td><td>Logical NOT (subtract from 1)</td><td>Negation</td></tr>
 <tr><td>buf</td><td>Swap value and top of stack</td><td>Same as Prefix</td></tr>
 <tr><td>cond</td><td>Absolute value</td><td>Same as Prefix</td></tr>
@@ -142,4 +142,8 @@ A source file (extension .c) can be executed using the Python 3 based interprete
 supplying its name as a command line argument. One of the most unique components
 of this language is also important to note at this stage: *a program must
 be valid C (syntactically) in order to be valid C, But Not.* This is the reason
-for the inclusion of declaration statements. A compiler to C is also in progress.
+for the inclusion of declaration statements.
+
+The `compiler.py` script translated C, But Not code into vanilla C99.
+It communicates only via stdio, so you need to pipe in and out of it.
+Using the `counter` operation requires gcc extensions.
